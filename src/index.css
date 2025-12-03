@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+header:has(.expandable-nav) {
+  animation: enter 1s ease-out forwards;
+}
+
+.expandable-nav {
+  a {
+    display: inline-grid;
+    align-items: center;
+    grid-auto-flow: column;
+    gap: 0.5rem;
+  }
+  a::after {
+    right: 0;
+    content: attr(title);
+    max-width: 0px;
+    visibility: hidden;
+    font-family: monospace;
+    transition: 0.7s ease-out;
+    transition-property: max-width opacity;
+    opacity: 0;
+  }
+}
+
+nav:hover > a::after,
+nav:focus > a::after,
+a:focus-visible::after {
+  visibility: visible;
+  max-width: 100px;
+  opacity: 1;
+}
+
+@keyframes enter {
+  from {
+    translate: 0 -200px;
+  }
+
+  to {
+    translate: 0 0;
+  }
+}
