@@ -1,7 +1,0 @@
-[site]
-bucket = "./dist"
-
-[[headers]]
-for = "/assets/*.js"
-[headers.values]
-Content-Type = "application/javascript"
