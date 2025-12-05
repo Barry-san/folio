@@ -1,34 +1,37 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
 @import "tailwindcss";
 
-header:has(.expandable-nav) {
-  animation: enter 0.5s ease-out forwards;
-}
-
-.expandable-nav {
-  a {
-    display: inline-grid;
-    align-items: center;
-    grid-auto-flow: column;
-    gap: 0.5rem;
+@media (hover) {
+  header:has(.expandable-nav) {
+    animation: enter 0.5s ease-out forwards;
   }
-  a::after {
-    right: 0;
-    content: attr(title);
-    max-width: 0px;
-    visibility: hidden;
-    font-family: monospace;
-    transition: 0.7s ease-out;
-    transition-property: max-width opacity;
-    opacity: 0;
-  }
-}
 
-nav:hover > a::after,
-nav:focus > a::after,
-a:focus-visible::after {
-  visibility: visible;
-  max-width: 100px;
-  opacity: 1;
+  .expandable-nav {
+    a {
+      display: inline-grid;
+      align-items: center;
+      grid-auto-flow: column;
+      gap: 0.5rem;
+    }
+    a::after {
+      right: 0;
+      content: attr(title);
+      max-width: 0px;
+      visibility: hidden;
+      font-family: monospace;
+      transition: 0.7s ease-out;
+      transition-property: max-width opacity;
+      opacity: 0;
+    }
+  }
+
+  nav:hover > a::after,
+  nav:focus > a::after,
+  a:focus-visible::after {
+    visibility: visible;
+    max-width: 100px;
+    opacity: 1;
+  }
 }
 
 @keyframes enter {
@@ -38,5 +41,54 @@ a:focus-visible::after {
 
   to {
     translate: 0 0;
+  }
+}
+
+@media (hover: none) {
+  .expandable-nav {
+    background-color: transparent;
+    border: none;
+    a {
+      grid-auto-flow: row;
+      justify-items: center;
+    }
+
+    a::after {
+      max-width: 100px;
+      visibility: visible;
+      opacity: 1;
+    }
+
+    a:hover::after {
+      text-decoration: underline;
+    }
+  }
+}
+
+@theme inline {
+  --font-jb-mono: "JetBrains Mono", sans-serif;
+}
+
+.experience {
+  background-color: border;
+  position: relative;
+  &::before {
+    left: 0;
+    position: absolute;
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 1000%;
+    background-color: black;
+  }
+
+  &::after {
+    position: absolute;
+    left: 3px;
+    top: 25px;
+    content: "";
+    width: 3px;
+    height: 100%;
+    background-color: black;
   }
 }
